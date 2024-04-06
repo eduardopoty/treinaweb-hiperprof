@@ -1,4 +1,4 @@
-import PageTitle from "../ui/components/data-display/PageTitle";
+import PageTitle from "@components/data-display/PageTitle";
 import useIndex from "@data/hooks/pages/useIndex";
 import { TextField, Icon, Button } from "@mui/material";
 import { HomeContainer, BoxButtons } from "@styles/pages/index.styles";
