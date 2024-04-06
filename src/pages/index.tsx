@@ -1,10 +1,13 @@
 import PageTitle from "../ui/components/data-display/PageTitle";
+import useIndex from "@data/hooks/pages/useIndex";
 import { TextField, Icon, Button } from "@mui/material";
 import { HomeContainer, BoxButtons } from "@styles/pages/index.styles";
 
 export default function Home() {
+  const { messageErro, setSearch, onBuscarProfessor } = useIndex();
+
   return (
-    <HomeContainer>
+    <HomeContainer onSubmit={onBuscarProfessor}>
       <PageTitle 
         title="ENCONTRE O PROFESSOR IDEAL PARA VOCÊ!" 
         subtitle="pesquise pelo professor ideal para você" 
@@ -12,9 +15,12 @@ export default function Home() {
       <TextField 
         sx={{ mt: 3, mb: 1}}
         label={"Encontre um Professor"}
+        error={messageErro.length > 0}
+        helperText={messageErro}
         InputProps={{
-          startAdornment: <Icon>search</Icon>,
+          startAdornment: <Icon sx={{ mr: 1 }}>search</Icon>,
         }}
+        onChange={({ target: { value } }) => setSearch(value)}
         fullWidth
         required
       />
