@@ -28,8 +28,7 @@ export default function Home() {
         <Button type="submit" variant="contained">
           Buscar o professor perfeito
         </Button>
-      </BoxButtons>
-      
+      </BoxButtons>  
     </HomeContainer>
   );
 }
