@@ -20,7 +20,6 @@ export const BoxImage = styled(Box, {
     justify-content: center;
     background: no-repeat center/cover 
         ${({ foto }) => `url(${ foto ?? "/user.svg"})`};
-    background-color: red;
     height: 100%;
     border-radius: ${({ theme }) => theme.spacing(1, 0, 0, 1)};
 

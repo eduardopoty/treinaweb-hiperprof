@@ -1,8 +1,11 @@
 import PageTitle from "@components/data-display/PageTitle";
+import useDetalheProfessor from "@data/hooks/pages/professor/useDetalheProfessor";
+import { TextFormatService } from "@data/services/TextFormatService";
 import { Button, Container, Typography } from "@mui/material";
 import { BoxDescription, BoxImage, BoxCardProfessor } from "@styles/pages/professor/detalhe-professor.styles";
 
 export default function DetalheProfessorPage() {
+    const { professor } = useDetalheProfessor();
     return (
         <Container>
             <PageTitle 
@@ -10,28 +13,21 @@ export default function DetalheProfessorPage() {
                 subtitle="Veja os detalhes do professor e verifique se ele é o ideal para você se candidatar a uma aula"
             />
             <BoxCardProfessor>
-                <BoxImage foto={ "https://github.com/eduardopoty.png" } />
+                <BoxImage foto={ professor?.foto_perfil } />
                 <BoxDescription>
                     <div className="box_esquerda">
-                        <Typography variant="h6">Nome</Typography>
+                        <Typography variant="h6">{professor?.nome}</Typography>
                         <Typography  sx={{ my: 2 }} className="descricao" paragraph variant="body2">
-                            Lorem, ipsum dolor sit amet consectetur 
-                            adipisicing elit. 
-                            Repellat ipsa impedit, distinctio debitis tenetur 
-                            consequatur? Tempora numquam ab harum voluptas 
-                            voluptatum praesentium voluptates eius. 
-                            Odit delectus molestiae beatae quisquam quaerat?
-                            Lorem, ipsum dolor sit amet consectetur 
-                            adipisicing elit. 
-                            Repellat ipsa impedit, distinctio debitis tenetur 
-                            consequatur? Tempora numquam ab harum voluptas 
-                            voluptatum praesentium voluptates eius. 
-                            Odit delectus molestiae beatae quisquam quaerat?
+                            {professor?.descricao}
                         </Typography>
                     </div>
                     <div className="box_direita">
-                        <Typography variant="body2" sx={{ my: 2 }}>PREÇO HORA/AULA</Typography>
-                        <Typography variant="h4" paragraph >25/10/2022</Typography>
+                        <Typography variant="body2" sx={{ my: 2 }}>
+                            PREÇO HORA/AULA
+                        </Typography>
+                        <Typography variant="h4" paragraph >
+                            {TextFormatService.currency(professor?.valor_hora)}
+                        </Typography>
                         <Button variant="outlined" color="inherit" onClick={() => {}}>
                             Contratar
                         </Button>
