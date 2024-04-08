@@ -1,3 +1,4 @@
+import Fetch from "@components/data-display/Fetch";
 import PageTitle from "@components/data-display/PageTitle";
 import ListaProfessorCard from "@components/data-display/ProfessorCard/listaProfessorCard";
 import useDetalheProfessor from "@data/hooks/pages/professor/useDetalheProfessor";
@@ -40,21 +41,29 @@ export default function DetalheProfessorPage() {
                     </div>
                 </BoxDescription>
             </BoxCardProfessor>
-            <Typography variant="body2" color={"grey"} sx={{ my:10 }}>
+            <Typography variant="body2" color={"grey"} sx={{ my: 10 }}>
                 {professor?.descricao}
             </Typography>
-                {professores ? (
-                    professores.length === 0 ? (
-                        "Nenhum professor encontrado"
-                    ) : (
-                        <ListaProfessorCard 
-                            professores={professores} 
-                            onClick={selecionarProfessor} 
-                        />    
-                    )
-                ) : (
-                    <CircularProgress />
-                )}         
+            <Fetch 
+                data={professores?.filter(({ id }) => id !== professor?.id)} 
+                mensagem={"nenhum professor encontrado"}
+                maxLength={3}
+                render={(professoresFiltrado) => {
+                    return (
+                        <>
+                            <PageTitle 
+                                title="OUTROS PROFESSORES SUGERIDOS" 
+                                color={"primary.light"}
+                            />
+                            <ListaProfessorCard
+                                professores={professoresFiltrado}
+                                onClick={selecionarProfessor}
+                            />
+                        </>
+                        
+                    );
+                }} 
+            />         
         </Container>
     );
 }
