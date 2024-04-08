@@ -1,4 +1,22 @@
-import Fetch from "@components/data-display/Fetch";
+import Dialog from "@components/feedback/Dialog";
+
+export default function DetalheProfessorPage() {
+    return (
+        <>
+            <p>DETALHE DO PROFESSOR</p>
+            <Dialog title="titulo do dialog">
+                <p>DETALHE DO PROFESSOR</p>
+                <p>DETALHE DO PROFESSOR</p>
+                <p>DETALHE DO PROFESSOR</p>
+                <p>DETALHE DO PROFESSOR</p>
+                <p>DETALHE DO PROFESSOR</p>
+            </Dialog>
+        </>
+    );
+}
+
+
+/* import Fetch from "@components/data-display/Fetch";
 import PageTitle from "@components/data-display/PageTitle";
 import ListaProfessorCard from "@components/data-display/ProfessorCard/listaProfessorCard";
 import useDetalheProfessor from "@data/hooks/pages/professor/useDetalheProfessor";
@@ -67,3 +85,4 @@ export default function DetalheProfessorPage() {
         </Container>
     );
 }
+*/
