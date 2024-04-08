@@ -1,11 +1,12 @@
 import PageTitle from "@components/data-display/PageTitle";
+import ListaProfessorCard from "@components/data-display/ProfessorCard/listaProfessorCard";
 import useDetalheProfessor from "@data/hooks/pages/professor/useDetalheProfessor";
 import { TextFormatService } from "@data/services/TextFormatService";
-import { Button, Container, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Typography } from "@mui/material";
 import { BoxDescription, BoxImage, BoxCardProfessor } from "@styles/pages/professor/detalhe-professor.styles";
 
 export default function DetalheProfessorPage() {
-    const { professor } = useDetalheProfessor();
+    const { professor, professores, selecionarProfessor } = useDetalheProfessor();
     return (
         <Container>
             <PageTitle 
@@ -17,7 +18,12 @@ export default function DetalheProfessorPage() {
                 <BoxDescription>
                     <div className="box_esquerda">
                         <Typography variant="h6">{professor?.nome}</Typography>
-                        <Typography  sx={{ my: 2 }} className="descricao" paragraph variant="body2">
+                        <Typography  
+                            sx={{ my: 2 }} 
+                            className="descricao"
+                            paragraph 
+                            variant="body2"
+                        >
                             {professor?.descricao}
                         </Typography>
                     </div>
@@ -25,7 +31,7 @@ export default function DetalheProfessorPage() {
                         <Typography variant="body2" sx={{ my: 2 }}>
                             PREÇO HORA/AULA
                         </Typography>
-                        <Typography variant="h4" paragraph >
+                        <Typography variant="h4" paragraph>
                             {TextFormatService.currency(professor?.valor_hora)}
                         </Typography>
                         <Button variant="outlined" color="inherit" onClick={() => {}}>
@@ -34,6 +40,21 @@ export default function DetalheProfessorPage() {
                     </div>
                 </BoxDescription>
             </BoxCardProfessor>
+            <Typography variant="body2" color={"grey"} sx={{ my:10 }}>
+                {professor?.descricao}
+            </Typography>
+                {professores ? (
+                    professores.length === 0 ? (
+                        "Nenhum professor encontrado"
+                    ) : (
+                        <ListaProfessorCard 
+                            professores={professores} 
+                            onClick={selecionarProfessor} 
+                        />    
+                    )
+                ) : (
+                    <CircularProgress />
+                )}         
         </Container>
-    )
+    );
 }
